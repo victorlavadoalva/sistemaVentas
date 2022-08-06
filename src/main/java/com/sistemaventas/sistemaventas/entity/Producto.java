@@ -1,10 +1,27 @@
 package com.sistemaventas.sistemaventas.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "producto")
 public class Producto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IdProducto")
+    private int idProducto;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "IdCategoria")
+    @JsonProperty(access = Access.WRITE_ONLY)
+    private Categoria categoria;
+    @Column(name = "Nombre")
+    private String nombre;
+    @Column(name = "Precio")
+    private double precio;
+
     public int getIdProducto() {
         return idProducto;
     }
@@ -13,12 +30,12 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getNombre() {
@@ -45,16 +62,6 @@ public class Producto {
         this.stock = stock;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdProducto")
-    private int idProducto;
-    @Column(name = "IdCategoria")
-    private int idCategoria;
-    @Column(name = "Nombre")
-    private String nombre;
-    @Column(name = "Precio")
-    private double precio;
     @Column(name = "Stock")
     private int stock;
 }

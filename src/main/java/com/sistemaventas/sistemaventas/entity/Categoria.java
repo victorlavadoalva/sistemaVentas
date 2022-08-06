@@ -1,6 +1,8 @@
 package com.sistemaventas.sistemaventas.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "categoria")
@@ -12,6 +14,12 @@ public class Categoria {
     private int idCategoria;
     @Column(name = "Nombre")
     private String nombre;
+
+    @Column(name = "Descripcion")
+    private String descripcion;
+
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private Set<Producto> productos = new HashSet<>();
 
     public int getIdCategoria() {
         return idCategoria;
@@ -37,6 +45,16 @@ public class Categoria {
         this.descripcion = descripcion;
     }
 
-    @Column(name = "Descripcion")
-    private String descripcion;
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+        for(Producto producto : productos) {
+            producto.setCategoria(this);
+        }
+    }
+
+
 }
