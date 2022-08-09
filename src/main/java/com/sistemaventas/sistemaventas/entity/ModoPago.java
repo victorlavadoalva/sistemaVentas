@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class ModoPago {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy     = GenerationType.IDENTITY)
     @Column(name = "NumPago")
     private int numPago;
     @Column(name="Nombres")
