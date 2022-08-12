@@ -21,10 +21,13 @@ public class Producto {
     @JoinColumn(name = "IdCategoria")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Categoria categoria;
+
     @Column(name = "Nombre")
     private String nombre;
+
     @Column(name = "Precio")
     private double precio;
+
     @Column(name = "Stock")
     private int stock;
     public Producto() {}
