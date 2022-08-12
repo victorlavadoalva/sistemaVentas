@@ -1,8 +1,15 @@
 package com.sistemaventas.sistemaventas.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConstructorBinding;
+
 import javax.persistence.*;
-
-
+@Data
+@Getter
+@Setter
+@ConstructorBinding
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -23,51 +30,6 @@ public class Cliente {
     @Column(name = "Email")
     private String email;
 
-    public int getIdCliente() {
-        return idCliente;
-    }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getMesa() {
-        return mesa;
-    }
-
-    public void setMesa(String mesa) {
-        this.mesa = mesa;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

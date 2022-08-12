@@ -24,13 +24,13 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
-    @Autowired
-    private CategoriaService categoriaService;
 
     //create new producto
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Producto producto){
-        Optional<Categoria> categoriaOptional = categoriaService.findById(producto.getCategoria().getIdCategoria());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(producto));
+        /*Optional<Categoria> categoriaOptional = categoriaService.findById(producto.getCategoria().getIdCategoria());
         if(!categoriaOptional.isPresent()){
             return ResponseEntity.unprocessableEntity().build();
         }
@@ -40,10 +40,11 @@ public class ProductoController {
         URI ubicacion = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(productoGuardado.getIdProducto()).toUri();
 
-        return ResponseEntity.created(ubicacion).body(productoGuardado);
+        return ResponseEntity.created(ubicacion).body(productoGuardado);*/
     //libro es producto
         //https://www.youtube.com/watch?v=mgXmTZZCsbI&list=LL&index=3&t=5148s&ab_channel=LaTecnolog%C3%ADaAvanza
     }
+
 
 
 
@@ -97,9 +98,8 @@ public class ProductoController {
 
     @GetMapping
     public List<Producto> readAll(){
-        List<Producto> productos = StreamSupport
+        return StreamSupport
                 .stream(productoService.findAll().spliterator(),false)
                 .collect(Collectors.toList());
-        return productos;
     }
 }

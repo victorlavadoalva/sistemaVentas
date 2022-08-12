@@ -28,7 +28,7 @@ public class ClienteController {
 
     //read an user
     @GetMapping("/{id}")
-    public ResponseEntity<?> read (@PathVariable int id){
+    public ResponseEntity<?> read(@PathVariable int id){
         Optional<Cliente> oCliente = clienteService.findById(id);
 
         if(!oCliente.isPresent())
@@ -40,7 +40,7 @@ public class ClienteController {
 
     //update an user
     @PutMapping("/{id}")
-    public ResponseEntity<?> update (@RequestBody Cliente clienteDetails, @PathVariable(value = "id") int clienteId){
+    public ResponseEntity<?> update(@RequestBody Cliente clienteDetails, @PathVariable(value = "id") int clienteId){
         Optional<Cliente> cliente = clienteService.findById(clienteId);
 
         if(!cliente.isPresent()){
@@ -76,11 +76,10 @@ public class ClienteController {
     //read all users
     @GetMapping
     public List<Cliente> readAll(){
-        List<Cliente> clientes= StreamSupport
+
+        return StreamSupport
                 .stream(clienteService.findAll().spliterator(),false)
                 .collect(Collectors.toList());
-
-        return clientes;
     }
 
 }
